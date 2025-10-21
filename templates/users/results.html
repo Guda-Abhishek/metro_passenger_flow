@@ -1,0 +1,81 @@
+{% extends 'users/user_base.html' %}
+{% block title %}Metro Ticket Forecasting Results{% endblock %}
+{% block content %}
+<div class="bg-white bg-opacity-10 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/20 max-w-5xl w-full mx-auto my-8">
+    <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-600 mb-8 text-center animate-gradient">📊 Model Evaluation Metrics</h2>
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+        {% for model, metrics in results.items %}
+            <li class="bg-gradient-to-r from-cyan-500/30 to-blue-500/30 p-4 rounded-lg shadow-md text-white font-semibold transform transition-all hover:scale-105">
+                <span class="text-lg">🔍 <strong>{{ model }}</strong></span><br>
+                MAE: {{ metrics.MAE }} | RMSE: {{ metrics.RMSE }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-600 mb-8 text-center animate-gradient">📈 Forecasting Plots & Time Series Analysis</h2>
+
+    <div class="space-y-12">
+        <div class="plot-container bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20 transform transition-all hover:scale-101">
+            <h3 class="text-2xl font-bold text-white mb-4">Original Time Series</h3>
+            <p class="text-gray-200 mb-4">This plot shows the actual number of metro tickets booked over time, highlighting trends, spikes, or irregular patterns.</p>
+            <img src="/media/plots/original.png" alt="Original Time Series" class="w-full max-w-3xl mx-auto rounded-lg border border-gray-300/50">
+        </div>
+
+        <div class="plot-container bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20 transform transition-all hover:scale-101">
+            <h3 class="text-2xl font-bold text-white mb-4">Trend Component</h3>
+            <p class="text-gray-200 mb-4">The trend component represents the long-term direction of ticket bookings, highlighting overall growth or decline.</p>
+            <img src="/media/plots/trend.png" alt="Trend Component" class="w-full max-w-3xl mx-auto rounded-lg border border-gray-300/50">
+        </div>
+
+        <div class="plot-container bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20 transform transition-all hover:scale-101">
+            <h3 class="text-2xl font-bold text-white mb-4">Seasonal Component</h3>
+            <p class="text-gray-200 mb-4">This shows repeating patterns, such as weekday/weekend effects or rush hours, that occur at regular intervals.</p>
+            <img src="/media/plots/seasonal.png" alt="Seasonal Component" class="w-full max-w-3xl mx-auto rounded-lg border border-gray-300/50">
+        </div>
+
+        <div class="plot-container bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20 transform transition-all hover:scale-101">
+            <h3 class="text-2xl font-bold text-white mb-4">Residual Component</h3>
+            <p class="text-gray-200 mb-4">The residuals show what's left after removing trend and seasonality — the unpredictable part of the series.</p>
+            <img src="/media/plots/residual.png" alt="Residual Component" class="w-full max-w-3xl mx-auto rounded-lg border border-gray-300/50">
+        </div>
+
+        <div class="plot-container bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20 transform transition-all hover:scale-101">
+            <h3 class="text-2xl font-bold text-white mb-4">Autocorrelation Function (ACF)</h3>
+            <p class="text-gray-200 mb-4">ACF reveals the correlation between the current data point and its past values, aiding in ARIMA modeling.</p>
+            <img src="/media/plots/acf.png" alt="ACF Plot" class="w-full max-w-3xl mx-auto rounded-lg border border-gray-300/50">
+        </div>
+
+        <div class="plot-container bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20 transform transition-all hover:scale-101">
+            <h3 class="text-2xl font-bold text-white mb-4">Partial Autocorrelation Function (PACF)</h3>
+            <p class="text-gray-200 mb-4">PACF shows correlation with lagged values while controlling for shorter lags, useful for ARIMA's AR component.</p>
+            <img src="/media/plots/pacf.png" alt="PACF Plot" class="w-full max-w-3xl mx-auto rounded-lg border border-gray-300/50">
+        </div>
+
+        <div class="plot-container bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20 transform transition-all hover:scale-101">
+            <h3 class="text-2xl font-bold text-white mb-4">Daily Ticket Bookings by Weekday</h3>
+            <p class="text-gray-200 mb-4">This boxplot displays the distribution of tickets booked for each weekday, identifying the busiest days.</p>
+            <img src="/media/plots/daily_by_week.png" alt="Daily by Weekday" class="w-full max-w-3xl mx-auto rounded-lg border border-gray-300/50">
+        </div>
+
+        <div class="plot-container bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20 transform transition-all hover:scale-101">
+            <h3 class="text-2xl font-bold text-white mb-4">Monthly Ticket Booking Trend</h3>
+            <p class="text-gray-200 mb-4">This bar chart summarizes total ticket bookings per month, useful for seasonal planning.</p>
+            <img src="/media/plots/monthly.png" alt="Monthly Trend" class="w-full max-w-3xl mx-auto rounded-lg border border-gray-300/50">
+        </div>
+    </div>
+</div>
+<style>
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient 5s ease infinite;
+    }
+    .hover\:scale-101:hover {
+        transform: scale(1.01);
+    }
+</style>
+{% endblock %}

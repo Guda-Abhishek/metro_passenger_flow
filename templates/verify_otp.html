@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 6px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+        }
+
+        .alert {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Verify OTP</h2>
+        <input type="text" name="otp" class="form-control mb-3" required placeholder="Enter OTP">
+        <button type="submit" class="btn btn-submit">Verify OTP</button>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+</body>
+</html>

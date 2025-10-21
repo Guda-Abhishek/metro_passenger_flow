@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}User Panel{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url("{% static 'images/bg2.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-100 bg-opacity-80">
+    <nav class="bg-blue-900 bg-opacity-90 w-full p-4 shadow-lg flex items-center justify-between">
+        <h2 class="text-2xl font-extrabold text-white">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspHyderabad Metro </h2>
+        <div class="flex space-x-4">
+            <a href="{% url 'user_homepage' %}" 
+               class="flex items-center space-x-2 bg-blue-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-blue-700 transition-all duration-300">
+                <span>🏠</span><span>Dashboard</span>
+            </a>
+            <a href="{% url 'train_models' %}" 
+               class="flex items-center space-x-2 bg-blue-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-blue-700 transition-all duration-300">
+                <span>📈</span><span>Train Forecast Models</span>
+            </a>
+            <a href="{% url 'predict_form' %}" 
+               class="flex items-center space-x-2 bg-blue-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-blue-700 transition-all duration-300">
+                <span>🧾</span><span>Forecast Metro Ticket Demand</span>
+            </a>
+            <a href="{% url 'user_logout' %}" 
+               class="flex items-center space-x-2 bg-red-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-red-700 transition-all duration-300">
+                <span>🚪</span><span>Sign Out</span>
+            </a>
+        </div>
+    </nav>
+
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

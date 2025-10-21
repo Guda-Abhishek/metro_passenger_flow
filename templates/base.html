@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}User Management System{% endblock %}</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3a8a, #1e1b4b);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Inter', sans-serif;
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            transform: perspective(1px) translateZ(0);
+        }
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .nav-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        .slide-in {
+            animation: slideIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-900 to-indigo-950 p-6 shadow-lg">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center text-white animate-pulse">
+            Forecasting_Passenger_Traffic_in_Metro_Systems
+        </h1>
+
+    </header>
+
+    <!-- Navigation Section -->
+    <nav class="flex flex-wrap justify-center gap-3 p-5">
+        <a href="/" class="nav-button bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center space-x-2">
+            <i class="fas fa-home"></i>
+            <span>User Dashboard</span>
+        </a>
+        <a href="{% url 'register' %}" class="nav-button bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center space-x-2">
+            <i class="fas fa-user-plus"></i>
+            <span>Create Account</span>
+        </a>
+        <a href="{% url 'user_login' %}" class="nav-button bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center space-x-2">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Log In to Account</span>
+        </a>
+        <a href="{% url 'admin_login' %}" class="nav-button bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center space-x-2">
+            <i class="fas fa-user-shield"></i>
+            <span>Admin Access</span>
+        </a>
+    </nav>
+
+    <!-- Main Content Section -->
+    <main class="flex-grow container mx-auto p-5 fade-in">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-center text-gray-400 py-4">
+        <p>© 2025 User Management System. All rights reserved | 8498877585</p>
+        <p class="mt-1">Powered by Secure Authentication</p>
+    </footer>
+</body>
+</html>

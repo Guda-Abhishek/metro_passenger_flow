@@ -1,0 +1,31 @@
+{% extends 'users/user_base.html' %}
+{% block title %}User Home Page{% endblock %}
+{% block content %}
+<div class="relative text-center bg-gradient-to-br from-indigo-500/30 via-purple-500/30 to-pink-500/30 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/20 max-w-lg mx-auto my-8 transform transition-all hover:scale-105 duration-500">
+    <h1 class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-600 mb-8 animate-gradient">Welcome, {{ user_name }}!</h1>
+    <img src="{{ user_image }}" alt="User Image" class="w-48 h-48 object-cover rounded-full mx-auto mb-8 border-4 border-gradient-to-r from-yellow-400 to-orange-400 shadow-xl transform transition-transform hover:scale-110 duration-300"/>
+    <p class="text-xl font-bold text-white bg-gradient-to-r from-pink-600 to-red-500 py-3 px-6 rounded-full shadow-md">Login time: {{ login_time }}</p>
+    <!-- Colorful floating particles -->
+    <span class="absolute top-2 left-2 text-3xl animate-float">✨</span>
+    <span class="absolute bottom-2 right-2 text-3xl animate-float delay-300">🎉</span>
+    <span class="absolute top-1/2 left-0 text-2xl animate-float delay-150">🔥</span>
+</div>
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+        50% { transform: translateY(-15px) rotate(10deg); opacity: 1; }
+    }
+    .animate-float { animation: float 3s infinite ease-in-out; }
+    .delay-150 { animation-delay: 0.15s; }
+    .delay-300 { animation-delay: 0.3s; }
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient 5s ease infinite;
+    }
+</style>
+{% endblock %}
