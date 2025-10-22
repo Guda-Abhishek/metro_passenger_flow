@@ -71,7 +71,15 @@ def admin_login(request):
         name = request.POST.get('name')
         password = request.POST.get('password')
 
-        if name == 'admin' and password == 'admin':
+        # Define admin credentials
+        admins = {
+            'chandu': 'chandu',
+            'abhishek': 'abhishek',
+            'rahul': 'rahul',
+            'sanjana': 'sanjana'
+        }
+
+        if name in admins and admins[name] == password:
             return redirect('admin_home')
         else:
             msg = "Invalid admin credentials."
