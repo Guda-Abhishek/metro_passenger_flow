@@ -1,0 +1,10 @@
+Django==5.2
+joblib
+pandas
+numpy
+matplotlib
+seaborn
+statsmodels
+scikit-learn
+xgboost
+pytz
